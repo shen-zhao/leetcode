@@ -6,7 +6,7 @@ https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/
  * @param {number[]} prices
  * @return {number}
  */
-// 解法一：滑动窗口
+// 解法一：双指针
 var maxProfit = function (prices) {
   if (prices.length < 2) return 0;
   let len = prices.length;

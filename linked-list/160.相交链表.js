@@ -52,3 +52,19 @@ var getIntersectionNode = function (headA, headB) {
 
   return null;
 };
+
+/**
+ * 双指针
+ * 原理与解法一类似，找出长度差，然后对其遍历
+ * 本解法有点在于写法简单，比较巧妙
+ * https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/xiang-jiao-lian-biao-by-leetcode-solutio-a8jn/
+*/
+var getIntersectionNode = function(headA, headB) {
+  let pA = headA, pB = headB
+  while (pA !== pB) {
+    pA = pA == null ? headB : pA.next
+    pB = pB == null ? headA : pB.next
+  }
+
+  return pA
+}
