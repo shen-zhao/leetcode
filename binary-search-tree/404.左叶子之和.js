@@ -6,21 +6,19 @@ https://leetcode-cn.com/problems/sum-of-left-leaves/
  * @param {TreeNode} root
  * @return {number}
  */
-var isLeafNode = (node) => !node.left && !node.right
+var isLeafNode = node => !node.left && !node.right
 var sumOfLeftLeaves = function (root) {
   let ans = 0
-  let dfs = (node) => {
-    if (node == null) return
-    if (node.left) {
-      if (isLeafNode(node.left)) {
-        ans += node.left.val
-      }
+  if (root == null) return ans
+  let helper = node => {
+    if (node.left && isLeafNode(node.left)) {
+      ans += node.left.val
+    } else {
+      node.left && helper(node.left)
     }
-    dfs(node.left)
-    dfs(node.right)
+    node.right && helper(node.right)
   }
 
-  dfs(root)
-
+  helper(root)
   return ans
 };

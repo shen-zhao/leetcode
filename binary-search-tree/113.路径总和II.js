@@ -29,28 +29,27 @@ var pathSum = function (root, targetSum) {
 };
 
 // 优化版，公用一个数组，妙用回溯
-var pathSum = function (root, targetSum) {
+var isLeafNode = (node) => !node.left && !node.right
+var pathSum = function(root, targetSum) {
   let ans = []
-  let visiter = []
   if (root == null) return ans
+  let visitor = []
 
-  let dfs = (node, sum = 0) => {
-    sum += node.val
+  let helper = node => {
     // 入栈
-    visiter.push(node.val)
+    visitor.push(node.val)
     if (isLeafNode(node)) {
-      if (targetSum === sum) {
-        ans.push(visiter.slice())
+      if (visitor.reduce((a, b) => a + b) === targetSum) {
+        ans.push(visitor.slice())
       }
     } else {
-      node.left && dfs(node.left, sum)
-      node.right && dfs(node.right, sum)
+      node.left && helper(node.left)
+      node.right && helper(node.right)
     }
     // 出栈(回溯)
-    visiter.pop()
+    visitor.pop()
   }
 
-  dfs(root)
-
+  helper(root)
   return ans
 };

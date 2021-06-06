@@ -35,19 +35,15 @@ var isSymmetric = function (root) {
 };
 
 // 递归
-var isSymmetric = function (root) {
-  if (root == null) return true;
+var isSymmetric = function(root) {
+  if (root == null) return true
 
-  const check = (l, r) => {
-    if (!l && !r) {
-      return true;
-    }
-    if (!l || !r) {
-      return false;
-    }
-
-    return l.val === r.val && check(l.left, r.right) && check(l.right, r.left);
+  let helper = (left, right) => {
+    if (!left && !right) return true
+    if (!left || !right) return false
+    if (left.val !== right.val) return false
+    return helper(left.left, right.right) && helper(left.right, right.left)
   }
 
-  return check(root.left, root.right);
+  return helper(root.left, root.right)
 };

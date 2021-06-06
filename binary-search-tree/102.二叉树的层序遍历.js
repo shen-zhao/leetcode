@@ -26,21 +26,22 @@ var dfs = (node, res, d = 0) => {
 }
 
 // 解法二：广度优先搜索
-var levelOrder = function (root) {
-  let ans = [];
-  if (root == null) return ans;
-  let queue = [root];
-  let len;
+var levelOrder = function(root) {
+  let ans = []
+  if (root == null) return ans
+  let queue = [root]
+  let len
   while (len = queue.length) {
-    ans.push([]);
+    let level = []
     // 此步是关键，一次性把队列中的节点全部消费掉，消费掉的节点就是统一层级的节点
     for (let i = 0; i < len; i++) {
-      node = queue.shift();
-      ans[ans.length - 1].push(node.val);
-      node.left && queue.push(node.left);
-      node.right && queue.push(node.right);
+      let node = queue.shift()
+      level.push(node.val)
+      node.left && queue.push(node.left)
+      node.right && queue.push(node.right)
     }
+    ans.push(level)
   }
 
-  return ans;
+  return ans
 };

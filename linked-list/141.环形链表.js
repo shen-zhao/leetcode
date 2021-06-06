@@ -5,7 +5,7 @@ https://leetcode-cn.com/problems/linked-list-cycle/
 // 解法一: 快慢指针，c1每次走一步，c2每次走两步,时间 O(n) 空间O(1)
 var hasCycle = function (head) {
   let c1 = head,
-    c2 = head && head.next;
+    c2 = head && head.next && head.next.next;
 
   while (c1) {
     if (c1 === c2) {

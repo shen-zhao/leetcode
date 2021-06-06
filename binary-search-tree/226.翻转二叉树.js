@@ -13,36 +13,32 @@ https://leetcode-cn.com/problems/invert-binary-tree/
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-// 深度优先遍历，前序遍历
+// 深度优先遍历
 var invertTree = function (root) {
-  if (root != null) {
-    let tmp = root.left
-    root.left = root.right
-    root.right = tmp
+  if (root == null) return root
 
-    invertTree(root.left)
-    invertTree(root.right)
-  }
+  let tmp = root.left
+  root.left = invertTree(root.right)
+  root.right = invertTree(tmp)
 
   return root
 };
 
 // 广度优先遍历
 var invertTree = function (root) {
-  if (root == null) return root;
-  let stack = [root];
-  let len;
-
+  if (root == null) return root
+  let stack = [root]
+  let len
   while (len = stack.length) {
     for (let i = 0; i < len; i++) {
-      let node = stack.shift();
-      let tmp = node.right;
-      node.right = node.left;
-      node.left = tmp;
-      node.right && stack.push(node.right);
-      node.left && stack.push(node.left);
+      let node = stack.shift()
+      let tmp = node.left
+      node.left = node.right
+      node.right = tmp
+      node.left && stack.push(node.left)
+      node.right && stack.push(node.right)
     }
   }
 
-  return root;
+  return root
 };

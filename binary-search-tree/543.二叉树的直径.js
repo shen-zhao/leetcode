@@ -7,19 +7,17 @@ https://leetcode-cn.com/problems/diameter-of-binary-tree/
  * @return {number}
  */
 var diameterOfBinaryTree = function (root) {
-  let ans = 0 // 最长路径节点数
-  let dfs = (node) => {
+  let ans = 0
+  let helper = node => {
     if (node == null) return 0
+    let LH = helper(node.left)
+    let RH = helper(node.right)
 
-    let L = dfs(node.left)
-    let R = dfs(node.right)
-
-    ans = Math.max(L + R + 1, ans)
-
-    return Math.max(L, R) + 1
+    ans = Math.max(LH + RH + 1, ans)
+    return Math.max(LH, RH) + 1
   }
 
-  dfs(root)
+  helper(root)
   // 节点数转长度需要 - 1
   return ans - 1
 };

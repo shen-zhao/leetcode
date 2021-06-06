@@ -2,19 +2,20 @@
 https://leetcode-cn.com/problems/balanced-binary-tree/
 */
 // 
-var isBalanced = function (root) {
-  const isBST = (node) => {
-    if (node === null) {
-      return 0
+var isBalanced = function(root) {
+  let isBST = node => {
+    if (node == null) return 0
+    let leftHeight = isBST(node.left)
+    let rightHeight = isBST(node.right)
+    if (
+      leftHeight === -1
+      || rightHeight === -1
+      || Math.abs(leftHeight - rightHeight) > 1
+    ) {
+      return -1
     }
-
-    let l = isBST(node.left);
-    let r = isBST(node.right);
-    if (l === -1 || r === -1 || Math.abs(l - r) > 1) {
-      return -1;
-    }
-
-    return Math.max(l, r) + 1;
+    return Math.max(leftHeight, rightHeight) + 1
   }
-  return isBST(root) !== -1;
+
+  return isBST(root) !== -1
 };

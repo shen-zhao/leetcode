@@ -7,25 +7,25 @@ https://leetcode-cn.com/problems/binary-tree-paths/
  * @return {string[]}
  */
 // 深度优先遍历
+var isLeafNode = node => !node.left && !node.right
 var binaryTreePaths = function (root) {
   let ans = []
-  let helper = (node, path = '') => {
-    // 空间点直接返回不处理
-    if (node == null) {
-      return
+  if (root == null) return ans
+  // 访问记录
+  let visitor = []
+  let helper = node => {
+    // 入栈
+    visitor.push(node.val)
+    if (isLeafNode(node)) {
+      ans.push(visitor.join('->'))
+    } else {
+      node.left && helper(node.left)
+      node.right && helper(node.right)
     }
-
-    path = path ? path + '->' + node.val : node.val + ''
-    // 如果没有左节点和右节点，那么该节点就是叶子节点
-    if (!node.left && !node.right) {
-      ans.push(path)
-    }
-    helper(node.left, path)
-    helper(node.right, path)
+    // 出栈(回溯)
+    visitor.pop()
   }
-
   helper(root)
-
   return ans
 };
 
