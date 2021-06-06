@@ -67,23 +67,24 @@ var trap = function (height) {
 
 // 解法三  双指针变种
 var trap = function (height) {
-  let ans = 0;
-  let len = height.length;
+  let ans = 0
+  let len = height.length
   let left = 0,
-    right = len - 1;
+    right = len - 1
   let maxLeft = 0,
-    maxRight = 0;
+    maxRight = 0
+
   while (left <= right) {
     if (maxLeft < maxRight) {
-      ans += Math.max(0, maxLeft - height[left]);
-      maxLeft = Math.max(maxLeft, height[left]);
-      left++;
+      ans += Math.max(0, maxLeft - height[left])
+      maxLeft = Math.max(maxLeft, height[left])
+      left++
     } else {
-      ans += Math.max(0, maxRight - height[right]);
-      maxRight = Math.max(maxRight, height[right]);
-      right--;
+      ans += Math.max(0, maxRight - height[right])
+      maxRight = Math.max(maxRight, height[right])
+      right--
     }
   }
 
-  return ans;
+  return ans
 };

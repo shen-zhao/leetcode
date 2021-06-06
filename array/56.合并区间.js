@@ -7,6 +7,7 @@ https://leetcode-cn.com/problems/merge-intervals/
  * @return {number[][]}
  */
 var merge = function (intervals) {
+  // 根据区间开始元素排序
   intervals.sort((a, b) => a[0] - b[0])
   let ans = [intervals[0]]
   let len = intervals.length
