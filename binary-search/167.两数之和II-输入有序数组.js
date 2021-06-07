@@ -10,7 +10,7 @@ https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
  */
 var twoSum = function (numbers, target) {
   let i = 0;
-  j = numbers.length - 1
+  let j = numbers.length - 1
 
   while (i < j) {
     if (numbers[j] + numbers[i] > target) {
